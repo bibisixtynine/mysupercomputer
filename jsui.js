@@ -197,7 +197,7 @@ function hideUI() {
 
 function removeChildren(node) {
   while (node.hasChildNodes()) {
-    node.removeEventListener()
+    //node.removeEventListener()
     node.removeChild(node.lastChild)
   }
 }

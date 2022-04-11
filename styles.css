@@ -1,20 +1,22 @@
-#editor {
+/* mysupercomputer css */
 
+/* structure :
+- un div 'container' qui contient :
+  -> un div 'view', le résultat de l'exec du code
+  -> un div 'editor', l'éditeur de code
+  -> un div 'screenShareSlider' qui agit comme
+  un slider permettant de répartir l'espace
+  du div 'view' vs 'editor'
+*/
+
+
+#container {
   position: fixed;
-  top: 0%;
-  left: 0%;
-  width: 50vw;
-  height: 100%;
-
-   -webkit-tap-highlight-color: red;
-    -webkit-user-select: text;
-  user-select: text;
-
-}
-
-.CodeMirror {
-  border: 1px solid #eeeeee;
-  height: 100% !important;
+  top: 0px;
+  left: 0px;
+  width: 100vw;
+  height: 100vh;
+  /*background-color: blue;*/
 }
 
 #view {
@@ -23,40 +25,52 @@
   left: 50vw;
   width: 50vw;
   height: 100%;
-  
+
   overflow: auto;
   /*background-color: yellow;*/
 }
 
+#editor {
+  position: fixed;
+  top: 0%;
+  left: 0%;
+  width: 50vw;
+  height: 100%;
 
-#container {
-   position: fixed;
-  top: 0px;
-  left: 0px;
-  width: 100vw;
-  height: 100vh;
-  /*background-color: blue;*/
+  -webkit-tap-highlight-color: blue;
+  -webkit-user-select: text;
+  user-select: text;
 }
 
+/* codemirror5 editor tuning */
+.CodeMirror {
+  /*border: 1px solid #eeeeee;*/
+  height: 100% !important;
+}
 
 #screenShareSlider {
   text-align: center;
   line-height: 30px;
-  
+
   font-weight: 600;
-  background-color:orange;
+  background-color: orange;
   border-style: solid;
   border-radius: 30px;
-  border-width:5px;
+  border-width: 5px;
   position: absolute;
   left: 50vw;
   top: 50vh;
   width: 30px;
   height: 30px;
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
   cursor: move;
   z-index: 1000;
 }
+
+/* html color tag shortcut... so
+<bleu>Hello <red>World
+is valid :)
+*/
 
 vert {
   color: green;
@@ -107,7 +121,7 @@ avoine {
 }
 
 saumon {
-  color : salmon;
+  color: salmon;
 }
 
 peche {
@@ -139,7 +153,7 @@ marron {
 }
 
 noir {
-  color : black;
+  color: black;
 }
 
 beige {
