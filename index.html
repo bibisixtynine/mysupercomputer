@@ -4,30 +4,42 @@
   <head>
     <title>Karl</title>
 
-    
+    <meta
+      name="viewport"
+      content="viewport-fit=cover,user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1"
+    />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+
     <!------------------------------------------------>
     <!-- ICONs --------------------------------------->
     <!------------------------------------------------>
-    <link
-      rel="icon"
-      href="https://cdn.glitch.global/1a69196f-7dd1-48fa-8c13-3cd2b83bae7a/draw-69.png?v=1645921642438"
-    />
     <link
       id="favicon"
       rel="icon"
       href="https://cdn.glitch.global/1a69196f-7dd1-48fa-8c13-3cd2b83bae7a/draw-69.png?v=1645921642438"
       type="image/png"
     />
-    <link
-      rel="apple-touch-icon"
-      href="https://cdn.glitch.global/1a69196f-7dd1-48fa-8c13-3cd2b83bae7a/draw-69.png?v=1645921642438"
-    />
     <!------------------------------------------------>
 
     <!------------------------------------------------>
     <!-- PWA setup ----------------------------------->
     <!------------------------------------------------>
+    
+    <!-- manifest -->
     <link rel="manifest" href="manifest.json" />
+    
+    <!-- increase the compatibilty of the manifest for ios/windows...-->
+    <script
+      async
+      src="https://unpkg.com/pwacompat"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- service worker -->
     <script>
       if (location.protocol == "http:") location.protocol = "https:";
       if ("serviceWorker" in navigator) {
@@ -84,9 +96,11 @@
       type="text/javascript"
       charset="utf-8"
     ></script>
-      
-      <link rel="stylesheet"
-  href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.2/theme/monokai.min.css"/>
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.2/theme/monokai.min.css"
+    />
 
     <script type="module" src="index.js"></script>
   </body>

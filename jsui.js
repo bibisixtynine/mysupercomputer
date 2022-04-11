@@ -19,6 +19,7 @@ let el = document.createElement('meta');
 el.charset = 'utf-8';
 document.head.appendChild(el);
 
+/*
 Meta(
   'viewport',
   `
@@ -28,9 +29,11 @@ Meta(
     initial-scale=1,
     maximum-scale=1`
 );
+
+
 Meta('apple-mobile-web-app-status-bar-style', 'black-translucent');
 Meta('apple-mobile-web-app-capable', 'yes');
-
+*/
 
 //
 // 2) append UI divs
@@ -67,20 +70,7 @@ subDiv.appendChild(ui);
 
 let sheet = document.createElement('style');
 sheet.innerHTML = `
-html,body {
 
-  -webkit-text-size-adjust: 100%;
-  -webkit-touch-callout: none;
-  -webkit-tap-highlight-color: transparent;
-  -moz-user-select: -moz-none;
-  -webkit-user-select: none;
-  -ms-user-select: none;
-  padding:0px;
-  margin: 0px;
-  user-select: none;
-  touch-action: none;
-  background-color: black;
-}
 
 
 .outer-container {
