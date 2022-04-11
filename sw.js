@@ -15,7 +15,8 @@ self.addEventListener("install", e => {
         "/index.js",
         "/styles.css",
         "/jsui.js",
-        "/zutils.js"
+        "/zutils.js",
+        "https://cdn.glitch.global/3d4c6936-ea72-4e35-8159-be211884b2e2/mysupercomputer_splash.png?v=1649689543527"
       ]);
     })
   );
