@@ -195,11 +195,18 @@ function hideUI() {
   ui.style.display = 'none';
 }
 
+function removeChildren(node) {
+  while (node.hasChildNodes()) {
+    node.removeEventListener()
+    node.removeChild(node.lastChild)
+  }
+}
+
 // NEW ///////////////////////////////////
 //
 function resetUI() {
   let ui = document.getElementById('ui');
-  ui.replaceChildren()
+  removeChildren(ui)
   ui.style.overflowY = '';
   ui.style.height = '';
 }
@@ -376,13 +383,13 @@ function addStyleToElement(element) {
   element.onClick = closure => {
     element.addEventListener('mousedown', event => {
       flash(event.target);
-      setTimeout(closure, 200, event);
+      setTimeout(closure, 1, event);
     });
 
     element.addEventListener('touchstart', event => {
       flash(event.target);
       event.preventDefault();
-      setTimeout(closure, 200, event);
+      setTimeout(closure, 1, event);
     });
     return element;
   };

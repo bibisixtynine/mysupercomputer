@@ -7,10 +7,8 @@
   height: 100%;
 
    -webkit-tap-highlight-color: red;
-    -webkit-user-select: auto;
-  user-select: none;
-
-
+    -webkit-user-select: text;
+  user-select: text;
 
 }
 

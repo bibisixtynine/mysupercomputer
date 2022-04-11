@@ -355,7 +355,7 @@ if (!isInstalledAsPWA()) {
     }
   }
 
-  document.body.addEventListener("resize", () => {
+  window.addEventListener("resize", () => {
     resize();
   });
   resize();
@@ -365,7 +365,7 @@ if (!isInstalledAsPWA()) {
     let view = document.getElementById("view");
     slider.style.left = view.style.left;
   }
-  document.body.addEventListener("resize", () => {
+  window.addEventListener("resize", () => {
     resize();
   });
   resize();
