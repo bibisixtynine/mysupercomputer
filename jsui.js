@@ -68,7 +68,7 @@ subDiv.appendChild(ui);
 let sheet = document.createElement('style');
 sheet.innerHTML = `
 html,body {
-/*
+
   -webkit-text-size-adjust: 100%;
   -webkit-touch-callout: none;
   -webkit-tap-highlight-color: transparent;
@@ -78,7 +78,7 @@ html,body {
   padding:0px;
   margin: 0px;
   user-select: none;
-  touch-action: none;*/
+  touch-action: none;
   background-color: black;
 }
 

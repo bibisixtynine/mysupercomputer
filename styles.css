@@ -5,12 +5,18 @@
   left: 0%;
   width: 50vw;
   height: 100%;
-  left: 0vw;
+
+   -webkit-tap-highlight-color: red;
+    -webkit-user-select: auto;
+  user-select: none;
+
+
+
 }
 
 .CodeMirror {
   border: 1px solid #eeeeee;
-  height: auto;
+  height: 100% !important;
 }
 
 #view {

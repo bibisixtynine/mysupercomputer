@@ -20,45 +20,10 @@ import { stopSpeaking, say, log, iOS, isInstalledAsPWA } from "./zutils.js";
 //                                             //
 // music
 //
-import { pianoSampler } from '/instruments/piano.js';
-import { oscillatorSampler } from '/instruments/oscillator.js';
-import { synthetizerSampler } from '/instruments/synthetizer.js';
+import { pianoSampler } from "/instruments/piano.js";
+import { oscillatorSampler } from "/instruments/oscillator.js";
+import { synthetizerSampler } from "/instruments/synthetizer.js";
 
-
-
-///////////////////////////////////////////////////////
-//                                                  //
-// resize
-//
-if (!isInstalledAsPWA()) {
-  function resize() {
-    let slider = document.getElementById("screenShareSlider");
-    let view = document.getElementById("view");
-    slider.style.left = view.style.left;
-
-    let frame = document.getElementById("container");
-    if (window.innerWidth < window.innerHeight) {
-      // portrait :
-      document.body.style.height = "-webkit-fill-available";
-      frame.style.height = "-webkit-fill-available";
-      //frame.style.backgroundColor = "yellow";
-      //document.body.style.backgroundColor = "orange";
-    } else {
-      // landscape :
-      document.body.style.height = "100vh";
-      frame.style.height = "100vh";
-      //frame.style.backgroundColor = "blue";
-      //document.body.style.backgroundColor = "darkBlue";
-    }
-  }
-
-  document.body.onresize = resize;
-  resize();
-}
-//
-// resize
-//                                                   \\
-///////////////////////////////////////////////////////
 
 
 ///////////////////////////////////////////////////////
@@ -123,32 +88,31 @@ function filter(e) {
     let editorParent = editor.parentNode;
     let editorParentWidth = editorParent.getBoundingClientRect().width;
     let percent = 100.0 * ((target.oldLeft + target.distX) / editorParentWidth);
-    editor.style.width = percent + "vw"
-    view.style.left = percent + "vw"
-    view.style.width = 100.0 - percent + "vw"
+    editor.style.width = percent + "vw";
+    view.style.left = percent + "vw";
+    view.style.width = 100.0 - percent + "vw";
   }
 
   function endDrag() {
-    target.moving = false
+    target.moving = false;
   }
-  target.onmouseup = endDrag
+  target.onmouseup = endDrag;
   //NOTICE THIS 👇
-  target.ontouchend = endDrag
+  target.ontouchend = endDrag;
   //NOTICE THIS 👆
 
-  document.onmouseup = endDrag
+  document.onmouseup = endDrag;
   //NOTICE THIS 👇
-  document.ontouchend = endDrag
+  document.ontouchend = endDrag;
 }
-document.onmousedown = filter
+document.onmousedown = filter;
 //NOTICE THIS 👇
-document.ontouchstart = filter
+document.ontouchstart = filter;
 //NOTICE THIS 👆
 //
 // dragging of the code/view slider
 //                                                   \\
 ///////////////////////////////////////////////////////
-
 
 ///////////////////////////////////////////////////////
 //                                                  //
@@ -162,18 +126,18 @@ let synthetizer = new synthetizerSampler();
 */
 
 window.piano = new pianoSampler();
-window.ArreteDeParler = stopSpeaking
-window.Dit = say
-window.NouvelleLigne = NewLine
-window.Ecris = Text
-window.Bouton = Button
-window.beep = beep
-window.largeurPage = document.getElementById("view").clientWidth
-window.hauteurPage = document.getElementById("view").clientHeight
+window.ArreteDeParler = stopSpeaking;
+window.Dit = say;
+window.NouvelleLigne = NewLine;
+window.Ecris = Text;
+window.Bouton = Button;
+window.beep = beep;
+window.largeurPage = document.getElementById("view").clientWidth;
+window.hauteurPage = document.getElementById("view").clientHeight;
 window.addEventListener("resize", () => {
-  window.largeurPage = document.getElementById("view").clientWidth
-  window.hauteurPage = document.getElementById("view").clientHeight
-})
+  window.largeurPage = document.getElementById("view").clientWidth;
+  window.hauteurPage = document.getElementById("view").clientHeight;
+});
 
 function resetTimers() {
   let maxId = setTimeout(function () {}, 0);
@@ -195,21 +159,18 @@ const evaluateCode = (code) => {
   }
 };
 
-
-let editor = CodeMirror(document.querySelector('#editor'), {
+let editor = CodeMirror(document.querySelector("#editor"), {
   lineNumbers: true,
   tabSize: 2,
   value: "console.log('hello world')",
-  viewportMargin: 10,
-  mode: 'javascript',
-    theme: 'monokai'
+  viewportMargin: Infinity,
+  mode: "javascript",
+  theme: "monokai",
 });
 
 editor.on("change", function (delta) {
   evaluateCode(editor.getValue());
 });
-
-
 
 ////////////////////////////////////// ACE EDITOR ////
 // ace // let editor = ace.edit("editor");
@@ -224,7 +185,6 @@ editor.on("change", function (delta) {
 // ace //  fontSize: 16,
 // ace //   scrollPastEnd: 60,
 // ace // });
-
 
 let code = localStorage.getItem("mysupercomputer-code");
 
@@ -369,6 +329,48 @@ function Blabla() {
 
 
 
+///////////////////////////////////////////////////////
+//                                                  //
+// resize
+//
+if (!isInstalledAsPWA()) {
+  function resize() {
+    let slider = document.getElementById("screenShareSlider");
+    let view = document.getElementById("view");
+    slider.style.left = view.style.left;
 
+    let frame = document.getElementById("container");
+    if (window.innerWidth < window.innerHeight) {
+      // portrait :
+      document.body.style.height = "-webkit-fill-available";
+      frame.style.height = "-webkit-fill-available";
+      //frame.style.backgroundColor = "yellow";
+      //document.body.style.backgroundColor = "orange";
+    } else {
+      // landscape :
+      document.body.style.height = "100vh";
+      frame.style.height = "100vh";
+      //frame.style.backgroundColor = "blue";
+      //document.body.style.backgroundColor = "darkBlue";
+    }
+  }
 
-
+  document.body.addEventListener("resize", () => {
+    resize();
+  });
+  resize();
+} else {
+  function resize() {
+    let slider = document.getElementById("screenShareSlider");
+    let view = document.getElementById("view");
+    slider.style.left = view.style.left;
+  }
+  document.body.addEventListener("resize", () => {
+    resize();
+  });
+  resize();
+}
+//
+// resize
+//                                                   \\
+///////////////////////////////////////////////////////
