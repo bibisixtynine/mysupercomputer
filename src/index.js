@@ -15,22 +15,39 @@ import {
 //
 // utils
 //
-import { stopSpeaking, say, log, iOS, isInstalledAsPWA } from "./zutils.js";
+import { stopSpeaking, say, log, iOS, isInstalledAsPWA } from "./zutils.js"
 
 //                                             //
 // music
 //
-import { pianoSampler } from "/instruments/piano.js";
-import { oscillatorSampler } from "/instruments/oscillator.js";
-import { synthetizerSampler } from "/instruments/synthetizer.js";
+import { pianoSampler } from "./instruments/piano.js"
+import { oscillatorSampler } from "./instruments/oscillator.js"
+import { synthetizerSampler } from "./instruments/synthetizer.js"
 
+
+import CodeMirror from './lib/codemirror.js'
+
+//import './lib/codemirror.css'
+//import './monokai.css'
+import './mode/javascript/javascript.js'
+
+
+// Import your required language in main.ts or at the root of your application
+// see https://codemirror.net/mode/index.html
+//import 'codemirror/mode/javascript/javascript';
+//import 'codemirror/mode/css/css';
+//import 'codemirror/mode/htmlmixed/htmlmixed';
+
+//import 'codemirror/addon/edit/matchbrackets';
+//import 'codemirror/addon/edit/closetag';
+//import 'codemirror/addon/selection/active-line';
 
 
 ///////////////////////////////////////////////////////
 //                                                  //
 // dragging of the code/view slider
 //
-const d = document.getElementsByClassName("draggable");
+const d = document.getElementsByClassName("draggable")
 
 function filter(e) {
   let target = e.target;
@@ -165,26 +182,12 @@ let editor = CodeMirror(document.querySelector("#editor"), {
   value: "console.log('hello world')",
   viewportMargin: Infinity,
   mode: "javascript",
-  theme: "monokai",
+  theme: "monokai"
 });
 
 editor.on("change", function (delta) {
   evaluateCode(editor.getValue());
 });
-
-////////////////////////////////////// ACE EDITOR ////
-// ace // let editor = ace.edit("editor");
-// ace // editor.setTheme("ace/theme/monokai");
-// ace // editor.session.setMode("ace/mode/javascript");
-
-// ace // editor.session.on("change", function (delta) {
-// ace //   evaluateCode(editor.getValue());
-// ace // });
-
-// ace // editor.setOptions({
-// ace //  fontSize: 16,
-// ace //   scrollPastEnd: 60,
-// ace // });
 
 let code = localStorage.getItem("mysupercomputer-code");
 

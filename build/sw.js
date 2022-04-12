@@ -12,10 +12,12 @@ self.addEventListener("install", e => {
       // Cache the homepage and stylesheets - add any assets you want to cache!
       return cache.addAll([
         "/",
-        "/index.js",
+        "/js/index.js",
         "/styles.css",
-        "/jsui.js",
-        "/zutils.js",
+        "/monokai.css",
+        "/codemirror.css",
+//        "/jsui.js",
+//        "/zutils.js",
       ]);
     })
   );
