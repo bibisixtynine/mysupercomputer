@@ -1,3 +1,6 @@
+import "./monokai.css"
+import "./styles.css"
+import "./codemirror.css"
 //
 // ui
 //
@@ -17,27 +20,18 @@ import {
 //
 import { stopSpeaking, say, log, iOS, isInstalledAsPWA } from "./zutils.js"
 
-//                                             //
+//
 // music
 //
 import { pianoSampler } from "./instruments/piano.js"
 import { oscillatorSampler } from "./instruments/oscillator.js"
 import { synthetizerSampler } from "./instruments/synthetizer.js"
 
-
+//
+// codemirror 5
+//
 import CodeMirror from './lib/codemirror.js'
-
-//import './lib/codemirror.css'
-//import './monokai.css'
 import './mode/javascript/javascript.js'
-
-
-// Import your required language in main.ts or at the root of your application
-// see https://codemirror.net/mode/index.html
-//import 'codemirror/mode/javascript/javascript';
-//import 'codemirror/mode/css/css';
-//import 'codemirror/mode/htmlmixed/htmlmixed';
-
 //import 'codemirror/addon/edit/matchbrackets';
 //import 'codemirror/addon/edit/closetag';
 //import 'codemirror/addon/selection/active-line';
