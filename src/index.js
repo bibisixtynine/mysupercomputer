@@ -1,6 +1,12 @@
-import "./monokai.css"
-import "./styles.css"
-import "./codemirror.css"
+// codemirror 6
+import { EditorState, EditorView, basicSetup } from "@codemirror/basic-setup";
+import { javascript } from "@codemirror/lang-javascript";
+import { defaultHighlightStyle } from "@codemirror/highlight";
+import { bracketMatching } from "@codemirror/matchbrackets";
+import { oneDark } from "@codemirror/theme-one-dark";
+
+import { codeExample } from "./codeexample.js";
+
 //
 // ui
 //
@@ -18,30 +24,22 @@ import {
 //
 // utils
 //
-import { stopSpeaking, say, log, iOS, isInstalledAsPWA } from "./zutils.js"
+import { stopSpeaking, say, log, iOS, isInstalledAsPWA } from "./zutils.js";
 
 //
 // music
 //
-import { pianoSampler } from "./instruments/piano.js"
-import { oscillatorSampler } from "./instruments/oscillator.js"
-import { synthetizerSampler } from "./instruments/synthetizer.js"
+import { pianoSampler } from "./instruments/piano.js";
+import { oscillatorSampler } from "./instruments/oscillator.js";
+import { synthetizerSampler } from "./instruments/synthetizer.js";
 
-//
-// codemirror 5
-//
-import CodeMirror from './lib/codemirror.js'
-import './mode/javascript/javascript.js'
-//import 'codemirror/addon/edit/matchbrackets';
-//import 'codemirror/addon/edit/closetag';
-//import 'codemirror/addon/selection/active-line';
-
+import "./styles.css";
 
 ///////////////////////////////////////////////////////
 //                                                  //
 // dragging of the code/view slider
 //
-const d = document.getElementsByClassName("draggable")
+const d = document.getElementsByClassName("draggable");
 
 function filter(e) {
   let target = e.target;
@@ -94,7 +92,7 @@ function filter(e) {
     target.style.left = target.oldLeft + target.distX + "px";
     target.style.top = target.oldTop + target.distY + "px";
 
-    let editor = document.getElementById("editor");
+    let editor = document.getElementById("editor-container");
     let view = document.getElementById("view");
     let editorParent = editor.parentNode;
     let editorParentWidth = editorParent.getBoundingClientRect().width;
@@ -136,6 +134,10 @@ let piano = new pianoSampler();
 let synthetizer = new synthetizerSampler();
 */
 
+///////////////////
+//
+// some 'written in french' function...
+//
 window.piano = new pianoSampler();
 window.ArreteDeParler = stopSpeaking;
 window.Dit = say;
@@ -149,7 +151,15 @@ window.addEventListener("resize", () => {
   window.largeurPage = document.getElementById("view").clientWidth;
   window.hauteurPage = document.getElementById("view").clientHeight;
 });
+//
+// some 'written in french' function...
+//
+///////////////////
 
+///////////////////
+//
+// utils...
+//
 function resetTimers() {
   let maxId = setTimeout(function () {}, 0);
 
@@ -169,7 +179,16 @@ const evaluateCode = (code) => {
     console.error(err);
   }
 };
+//
+// utils...
+//
+///////////////////
 
+/*
+/////////////////////////////
+//                        
+// editor (code mirror 5)
+//
 let editor = CodeMirror(document.querySelector("#editor"), {
   lineNumbers: true,
   tabSize: 2,
@@ -188,143 +207,76 @@ let code = localStorage.getItem("mysupercomputer-code");
 if (code) {
   editor.setValue(code);
 } else {
-  editor.setValue(`
-//////////////////////////
-//                     //
-// ma première webapp
-//
-
-Intro()
-
-Pianissimo()
-
-Animation()
-
-Blabla()
-
-//////////////////////////
-//                     //
-// pianissomo
-//
-function Pianissimo() {
-    Bouton('🎷 beep 🎻')
-      .onClick( () => {
-      beep();
-    });
-    
-    function Toolbar(sampler) {
-      let emojis = ['🍒', '🍈', '🍐', '🫐', '🥭', '🍓', '🥝', '🍒'];
-      let notes = ['C4', 'D4', 'E4', 'F4', 'G4', 'A4', 'B4', 'C5'];
-      for (let i = 0; i < emojis.length; i++) {
-        Bouton(emojis[i])
-          .onClick( ()=> {
-            sampler.play(notes[i]);
-        })
-      }
-    }
-    
-    NouvelleLigne();
-    Toolbar(piano);
+  editor.setValue(codeExample);
 }
-//                                  
-// pianissomo
-//                      \\\\
-//////////////////////////
-
-
-
-//////////////////////////
-//                     //
-// intro
 //
-function Intro() {
-    Ecris("<bleu>my<blanc>super<rouge>computer<saumon>.fun")
-    NouvelleLigne()
-    Ecris("🎲")
-    NouvelleLigne()
-    Ecris("🏓 découvrir la programmation de webapp en s'amusant !")
-    NouvelleLigne()
-    Ecris("🏄")
-    NouvelleLigne()
-}
-//                                  
-// intro
-//                      \\\\
-//////////////////////////
-
-
-//////////////////////////
-//                     //
-// animation
+// editor (codemirror 5)
 //
-function Animation() {
-    NouvelleLigne()
-    Bouton("baoum !<br>💥")
-        .onClick( ()=> {
-            let timer = setInterval( ()=> {
-            let x = Math.random() * largeurPage
-            let y = Math.random() * hauteurPage
-            Ecris("💥")
-                .position(x,y)
-            }, 100)
-        
-            setTimeout( ()=> {
-                beep()
-                clearInterval(timer)
-            }, 1000)
-        
-            NouvelleLigne()
-        
-            for (let i=0; i<100; i++)
-                Ecris(i)
-        })
-}
-//                                  
-// animation
-//                      \\\\
-//////////////////////////
+/////////////////////////////
+*/
 
-
-//////////////////////////
-//                     //
-// parole
+/////////////////////////////
 //
-function Blabla() {
-    NouvelleLigne()
-    Bouton('🤓 Ecoute moi compter !')
-    .onClick( ()=> {
-        ArreteDeParler()
-    
-        Dit("Bonjour Elise !")
-        Dit("maintenant je sais compter jusqu'à 10 !")
-        Dit("Si c'est pas génial çà ?")
-        Dit('Ecoute çà :')
-    
-        for (let i=0; i<10; i++) 
-            Dit(i)
-        
-        Dit("Et toi, jusqu'à combien sais tu compter ?")
-    })
-}
-//                                  
-// parole
-//                      \\\\
-//////////////////////////
+// editor (code mirror 6)
+//
+// Codemirror 6
 
-//                                  
-// ma première webapp
-//                      \\\\
-//////////////////////////
-`);
+let editorDiv = document.querySelector("#editor");
+
+let initial_doc = codeExample;
+
+const fontTheme = EditorView.theme({
+  "&": {
+    fontSize: "10.5pt",
+  },
+  ".cm-content": {
+    fontFamily: "Menlo, Monaco, Lucida Console, monospace",
+  },
+});
+
+let updateListenerExtension = EditorView.updateListener.of((update) => {
+  if (update.docChanged) {
+    evaluateCode(update.view.state.doc.toString());
+  }
+});
+
+let editor = new EditorView({
+  state: EditorState.create({
+    doc: initial_doc,
+    extensions: [
+      updateListenerExtension,
+      oneDark,
+      fontTheme,
+      basicSetup,
+      javascript(),
+      defaultHighlightStyle.fallback,
+      bracketMatching(),
+    ],
+  }),
+  parent: editorDiv,
+});
+
+let code = localStorage.getItem("mysupercomputer-code");
+
+if (code) {
+  editor.dispatch({
+    changes: { from: 0, to: editor.state.doc.length, insert: code },
+  });
+} else {
+  editor.dispatch({
+    changes: { from: 0, to: editor.state.doc.length, insert: codeExample },
+  });
 }
+//
+// editor (codemirror 6)
+//
+/////////////////////////////
 
 // ace // editor.getSession().selection.clearSelection();
 //
 // main
 //                                                   \\
 ///////////////////////////////////////////////////////
-
-
 
 ///////////////////////////////////////////////////////
 //                                                  //

@@ -22163,7 +22163,7 @@
   };
 
   // src/index.js
-  var import_codemirror = __toModule(require_codemirror());
+  var import_codemirror2 = __toModule(require_codemirror());
   var import_javascript = __toModule(require_javascript());
   var d = document.getElementsByClassName("draggable");
   function filter(e) {
@@ -22252,7 +22252,7 @@
       console.error(err);
     }
   };
-  var editor = (0, import_codemirror.default)(document.querySelector("#editor"), {
+  var editor = (0, import_codemirror2.default)(document.querySelector("#editor"), {
     lineNumbers: true,
     tabSize: 2,
     value: "console.log('hello world')",
