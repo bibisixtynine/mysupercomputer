@@ -1,11 +1,11 @@
 // codemirror 6
-import { EditorState, EditorView, basicSetup } from '@codemirror/basic-setup';
-import { javascript } from '@codemirror/lang-javascript';
-import { defaultHighlightStyle } from '@codemirror/highlight';
-import { bracketMatching } from '@codemirror/matchbrackets';
-import { oneDark } from '@codemirror/theme-one-dark';
+import { EditorState, EditorView, basicSetup } from "@codemirror/basic-setup";
+import { javascript } from "@codemirror/lang-javascript";
+import { defaultHighlightStyle } from "@codemirror/highlight";
+import { bracketMatching } from "@codemirror/matchbrackets";
+import { oneDark } from "@codemirror/theme-one-dark";
 
-import { codeExample } from './codeexample.js';
+import { codeExample } from "./codeexample.js";
 
 //
 // ui
@@ -19,32 +19,32 @@ import {
   toggleUI,
   Text,
   NewLine,
-} from './jsui.js';
+} from "./jsui.js";
 
 //
 // utils
 //
-import { stopSpeaking, say, log, iOS, isInstalledAsPWA } from './zutils.js';
+import { stopSpeaking, say, log, iOS, isInstalledAsPWA } from "./zutils.js";
 
 //
 // music
 //
-import { pianoSampler } from './instruments/piano.js';
-import { oscillatorSampler } from './instruments/oscillator.js';
-import { synthetizerSampler } from './instruments/synthetizer.js';
+import { pianoSampler } from "./instruments/piano.js";
+import { oscillatorSampler } from "./instruments/oscillator.js";
+import { synthetizerSampler } from "./instruments/synthetizer.js";
 
-import './style.css';
+import "./style.css";
 
 ///////////////////////////////////////////////////////
 //                                                  //
 // dragging of the code/view slider
 //
-const d = document.getElementsByClassName('draggable');
+const d = document.getElementsByClassName("draggable");
 
 function filter(e) {
   let target = e.target;
 
-  if (!target.classList.contains('draggable')) {
+  if (!target.classList.contains("draggable")) {
     return;
   }
 
@@ -61,9 +61,9 @@ function filter(e) {
   //NOTICE THIS 👆 Since there can be multiple touches, you need to mention which touch to look for, we are using the first touch only in this case
 
   target.oldLeft =
-    window.getComputedStyle(target).getPropertyValue('left').split('px')[0] * 1;
+    window.getComputedStyle(target).getPropertyValue("left").split("px")[0] * 1;
   target.oldTop =
-    window.getComputedStyle(target).getPropertyValue('top').split('px')[0] * 1;
+    window.getComputedStyle(target).getPropertyValue("top").split("px")[0] * 1;
 
   document.onmousemove = dr;
   //NOTICE THIS 👇
@@ -77,8 +77,8 @@ function filter(e) {
       return;
     }
     //NOTICE THIS 👇
-    let freezeY = target.classList.contains('freezeY');
-    let freezeX = target.classList.contains('freezeX');
+    let freezeY = target.classList.contains("freezeY");
+    let freezeX = target.classList.contains("freezeX");
 
     if (event.clientX) {
       if (!freezeX) target.distX = event.clientX - target.oldX;
@@ -89,17 +89,17 @@ function filter(e) {
     }
     //NOTICE THIS 👆
 
-    target.style.left = target.oldLeft + target.distX + 'px';
-    target.style.top = target.oldTop + target.distY + 'px';
+    target.style.left = target.oldLeft + target.distX + "px";
+    target.style.top = target.oldTop + target.distY + "px";
 
-    let editor = document.getElementById('editor-container');
-    let view = document.getElementById('view');
+    let editor = document.getElementById("editor-container");
+    let view = document.getElementById("view");
     let editorParent = editor.parentNode;
     let editorParentWidth = editorParent.getBoundingClientRect().width;
     let percent = 100.0 * ((target.oldLeft + target.distX) / editorParentWidth);
-    editor.style.width = percent + 'vw';
-    view.style.left = percent + 'vw';
-    view.style.width = 100.0 - percent + 'vw';
+    editor.style.width = percent + "vw";
+    view.style.left = percent + "vw";
+    view.style.width = 100.0 - percent + "vw";
   }
 
   function endDrag() {
@@ -145,11 +145,11 @@ window.NouvelleLigne = NewLine;
 window.Ecris = Text;
 window.Bouton = Button;
 window.beep = beep;
-window.largeurPage = document.getElementById('view').clientWidth;
-window.hauteurPage = document.getElementById('view').clientHeight;
-window.addEventListener('resize', () => {
-  window.largeurPage = document.getElementById('view').clientWidth;
-  window.hauteurPage = document.getElementById('view').clientHeight;
+window.largeurPage = document.getElementById("view").clientWidth;
+window.hauteurPage = document.getElementById("view").clientHeight;
+window.addEventListener("resize", () => {
+  window.largeurPage = document.getElementById("view").clientWidth;
+  window.hauteurPage = document.getElementById("view").clientHeight;
 });
 //
 // some 'written in french' function...
@@ -172,7 +172,7 @@ const evaluateCode = (code) => {
   //console.clear(); ///////////////////////////////// NEW //
   resetUI();
   resetTimers();
-  localStorage.setItem('mysupercomputer-code', code);
+  localStorage.setItem("mysupercomputer-code", code);
   try {
     Function(code)(window);
   } catch (err) {
@@ -221,16 +221,16 @@ if (code) {
 //
 // Codemirror 6
 
-let editorDiv = document.querySelector('#editor');
+let editorDiv = document.querySelector("#editor");
 
 let initial_doc = codeExample;
 
 const fontTheme = EditorView.theme({
-  '&': {
-    fontSize: '10.5pt',
+  "&": {
+    fontSize: "10.5pt",
   },
-  '.cm-content': {
-    fontFamily: 'Menlo, Monaco, Lucida Console, monospace',
+  ".cm-content": {
+    fontFamily: "Menlo, Monaco, Lucida Console, monospace",
   },
 });
 
@@ -239,6 +239,15 @@ let updateListenerExtension = EditorView.updateListener.of((update) => {
     evaluateCode(update.view.state.doc.toString());
   }
 });
+
+const styleHackToMakeSelectionWork = EditorView.theme(
+  {
+    ".cm-gutters": {
+      //display: "unset",
+      width: "available",
+    },
+  })
+  
 
 let editor = new EditorView({
   state: EditorState.create({
@@ -251,12 +260,13 @@ let editor = new EditorView({
       javascript(),
       defaultHighlightStyle.fallback,
       bracketMatching(),
+      styleHackToMakeSelectionWork
     ],
   }),
   parent: editorDiv,
 });
 
-let code = localStorage.getItem('mysupercomputer-code');
+let code = localStorage.getItem("mysupercomputer-code");
 
 if (code) {
   editor.dispatch({
@@ -284,37 +294,37 @@ if (code) {
 //
 if (!isInstalledAsPWA()) {
   function resize() {
-    let slider = document.getElementById('screenShareSlider');
-    let view = document.getElementById('view');
+    let slider = document.getElementById("screenShareSlider");
+    let view = document.getElementById("view");
     slider.style.left = view.style.left;
 
-    let frame = document.getElementById('container');
+    let frame = document.getElementById("container");
     if (window.innerWidth < window.innerHeight) {
       // portrait :
-      document.body.style.height = '-webkit-fill-available';
-      frame.style.height = '-webkit-fill-available';
+      document.body.style.height = "-webkit-fill-available";
+      frame.style.height = "-webkit-fill-available";
       //frame.style.backgroundColor = "yellow";
       //document.body.style.backgroundColor = "orange";
     } else {
       // landscape :
-      document.body.style.height = '100vh';
-      frame.style.height = '100vh';
+      document.body.style.height = "100vh";
+      frame.style.height = "100vh";
       //frame.style.backgroundColor = "blue";
       //document.body.style.backgroundColor = "darkBlue";
     }
   }
 
-  window.addEventListener('resize', () => {
+  window.addEventListener("resize", () => {
     resize();
   });
   resize();
 } else {
   function resize() {
-    let slider = document.getElementById('screenShareSlider');
-    let view = document.getElementById('view');
+    let slider = document.getElementById("screenShareSlider");
+    let view = document.getElementById("view");
     slider.style.left = view.style.left;
   }
-  window.addEventListener('resize', () => {
+  window.addEventListener("resize", () => {
     resize();
   });
   resize();
