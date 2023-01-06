@@ -3,7 +3,7 @@ export { codeExample };
 const codeExample = `
 //////////////////////////
 //                     //
-// maa première webapp
+// ma première webapp
 //
 
 Intro()

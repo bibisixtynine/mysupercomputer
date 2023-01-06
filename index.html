@@ -2,6 +2,8 @@
 
 <html lang="en">
   <head>
+    <meta charset="UTF-8" />
+
     <title>Karl</title>
 
     <!------------------------------------------------>
@@ -45,7 +47,8 @@
 
     <!-- service worker -->
     <script>
-      if (location.protocol == "http:") location.protocol = "https:";
+      // commented because make vite unable to open preview...
+      //if (location.protocol == "http:") location.protocol = "https:";
       if ("serviceWorker" in navigator) {
         navigator.serviceWorker
           .register("sw.js")
