@@ -8,6 +8,15 @@
     "build": "vite build",
     "preview": "vite preview"
   },
+  "dependencies": {
+    "@codemirror/basic-setup": "^0.19.1",
+    "@codemirror/highlight": "^0.19.8",
+    "@codemirror/lang-javascript": "^0.19.3",
+    "@codemirror/matchbrackets": "^0.19.4",
+    "@codemirror/theme-one-dark": "^0.19.1",
+    "@codemirror/view": "^0.19.36",
+    "tone": "^14.8.38"
+  },
   "devDependencies": {
     "vite": "^4.0.4"
   }
