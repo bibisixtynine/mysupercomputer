@@ -1,3 +1,3 @@
 # mysupercomputer-vite
 
-[Edit on StackBlitz ⚡️](https://stackblitz.com/edit/vitejs-vite-hqrjw1)
+[![Open in Codeflow](https://developer.stackblitz.com/img/open_in_codeflow.svg)](https:///pr.new/bibisixtynine/mysupercomputer-vite)
